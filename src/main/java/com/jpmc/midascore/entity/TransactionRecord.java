@@ -23,17 +23,22 @@ public class TransactionRecord {
     private float amount;
 
     @Column(nullable = false)
+    private float incentive;
+
+    @Column(nullable = false)
     private LocalDateTime timestamp;
 
     public TransactionRecord() {
         this.timestamp = LocalDateTime.now();
+        this.incentive = 0.0f;
     }
 
-    public TransactionRecord(UserRecord sender, UserRecord recipient, float amount) {
+    public TransactionRecord(UserRecord sender, UserRecord recipient, float amount, float incentive) {
         this();
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
+        this.incentive = incentive;
     }
 
     // Getters and Setters
@@ -49,12 +54,15 @@ public class TransactionRecord {
     public float getAmount() { return amount; }
     public void setAmount(float amount) { this.amount = amount; }
     
+    public float getIncentive() { return incentive; }
+    public void setIncentive(float incentive) { this.incentive = incentive; }
+    
     public LocalDateTime getTimestamp() { return timestamp; }
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 
     @Override
     public String toString() {
-        return String.format("Transaction[id=%d, sender='%s', recipient='%s', amount='%f']", 
-                           id, sender.getName(), recipient.getName(), amount);
+        return String.format("Transaction[id=%d, sender='%s', recipient='%s', amount='%f', incentive='%f']", 
+                           id, sender.getName(), recipient.getName(), amount, incentive);
     }
 }
