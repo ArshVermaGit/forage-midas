@@ -60,7 +60,7 @@ public class TransactionListener {
             Incentive incentive = incentiveService.getIncentive(transaction);
             logger.info("Received incentive: {}", incentive.getAmount());
 
-            // Update balances
+            // Update balances (incentive only added to recipient, not deducted from sender)
             sender.setBalance(sender.getBalance() - transaction.getAmount());
             recipient.setBalance(recipient.getBalance() + transaction.getAmount() + incentive.getAmount());
 
